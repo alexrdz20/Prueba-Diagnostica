@@ -1,0 +1,20 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.class
+
+# C compiled files
+*.exe
+*.o
+*.obj
+*.out
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS generated files
+Thumbs.db
+desktop.ini
