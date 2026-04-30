@@ -2,7 +2,7 @@
 
 Este repositorio contiene la resolución de los problemas planteados para la asignatura.
 
-## Estructura del Proyecto
+## Estructura de la prueba
 - **Problema1/**: Expansión polinómica (Triángulo de Pascal) en Python y Java.
 - **Problema2/**: Validador de notación FEN para ajedrez (Python).
 - **Problema3/**: Traductor de palabras reservadas del lenguaje C (C).
