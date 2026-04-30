@@ -1,4 +1,4 @@
-# Proyecto de Redes y Compiladores
+# Prueba de lenguajes y compiladores
 
 Este repositorio contiene la resolución de los problemas planteados para la asignatura.
 
