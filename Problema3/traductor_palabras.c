@@ -32,17 +32,36 @@ void procesar_archivo(const char *nombre) {
         return;
     }
 
+    /* Obtener tamaño del archivo para la memoria dinamica */
+    fseek(archivo, 0, SEEK_END);
+    long tamano = ftell(archivo);
+    fseek(archivo, 0, SEEK_SET);
+
+    /* Cargar en memoria de forma dinamica (Cumple requisito del PDF) */
+    char *codigo = (char *)malloc(tamano + 1);
+    if (!codigo) {
+        printf("\n[ERROR] No se pudo reservar memoria.\n");
+        fclose(archivo);
+        return;
+    }
+
+    fread(codigo, 1, tamano, archivo);
+    codigo[tamano] = '\0';
+    fclose(archivo);
+
     system("cls"); /* Limpia pantalla de traduccion */
-    printf("\n[OK] Cargando archivo: %s\n", nombre);
+    printf("\n[OK] Cargando archivo en memoria: %s\n", nombre);
     printf("--------------------------------------------------\n");
     printf("   CODIGO TRADUCIDO AL ESPANOL:\n");
     printf("--------------------------------------------------\n\n");
 
     char temp[256];
-    int j = 0, str = 0, c_lin = 0, c_blq = 0, c, ant = 0, sig = fgetc(archivo);
+    int j = 0, str = 0, c_lin = 0, c_blq = 0;
 
-    while ((c = sig) != EOF) {
-        sig = fgetc(archivo);
+    for (long i = 0; i <= tamano; i++) {
+        int c = codigo[i];
+        int ant = i > 0 ? codigo[i - 1] : 0;
+        int sig = i < tamano ? codigo[i + 1] : '\0';
 
         if (!c_lin && !c_blq && !str) {
             if (c == '/' && sig == '/') c_lin = 1;
@@ -52,26 +71,23 @@ void procesar_archivo(const char *nombre) {
             c_lin = 0;
         } else if (c_blq && c == '*' && sig == '/') {
             putchar(c); putchar(sig);
-            ant = sig; sig = fgetc(archivo);
-            c_blq = 0; continue;
+            c_blq = 0; i++; continue;
         } else if (str && c == '\"' && ant != '\\') {
             str = 0;
         }
 
         if (str || c_lin || c_blq) {
             if (j > 0) { temp[j] = '\0'; printf("%s", traducir(temp)); j = 0; }
-            putchar(c);
+            if (c != '\0') putchar(c);
         } else if (isalnum(c) || c == '_') {
             if (j < 255) temp[j++] = c;
         } else {
             if (j > 0) { temp[j] = '\0'; printf("%s", traducir(temp)); j = 0; }
-            putchar(c);
+            if (c != '\0') putchar(c);
         }
-        ant = c;
     }
 
-    if (j > 0) { temp[j] = '\0'; printf("%s", traducir(temp)); }
-    fclose(archivo);
+    free(codigo); /* Liberar memoria */
     
     printf("\n\n--------------------------------------------------\n");
     printf("   [INFO] COMPLETADO EXITOSAMENTE\n");
@@ -90,7 +106,9 @@ int main(int argc, char *argv[]) {
         printf("\n==================================================\n");
         printf("       TRADUCTOR DE CODIGO C A ESPANOL            \n");
         printf("==================================================\n");
-        printf("  [1] Ingresar manual   [2] basico   [3] completo \n");
+        printf("  [1] Ingresar nombre de archivo manualmente      \n");
+        printf("  [2] Usar Ejemplo basico (ejemplo_basico.c)      \n");
+        printf("  [3] Usar Ejemplo completo (ejemplo_completo.c)  \n");
         printf("  [0] Salir                                       \n");
         printf("--------------------------------------------------\n> ");
 
