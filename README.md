@@ -1,15 +1,32 @@
-# Prueba de lenguajes y compiladores
+# UNIVERSIDAD NACIONAL EXPERIMENTAL DE GUAYANA
+**VICERRECTORADO ACADÉMICO**  
+**COORDINACIÓN DE INGENIERÍA EN INFORMÁTICA**  
+**LENGUAJES Y COMPILADORES**  
+Msc. Félix Márquez (fmarquez@e.uneg.edu.ve)  
+Periodo lectivo: 2025-II  
+
+## Prueba Diagnóstica
+
+**1)** Dado un número entero no negativo n, a) genere los coeficientes del polinomio (x+1)n, muestre el resultado del polinomio y b) muestre por pasos el cálculo para x dado, f(x) = (x+1)n, según el polinomio generado. Implemente el algoritmo utilizando memoria dinámica. Codificar en dos lenguajes y medir el tiempo de ejecución de cada código para n=100 el resultado escribirlo en archivo txt.
+
+**2)** Dado una cadena C, valide si C se encuentra en notación FEN (Forsyth-Edwards Notation).
+
+**3)** Para un programa escrito en lenguaje C, cargado en una memoria de forma dinámica verifique si existen palabras reservadas en C y tradúzcalas a su equivalente en español.
+
+---
+
+# Resolución de los Problemas (Lo que hice)
 
 Este repositorio contiene la resolución de los problemas planteados para la asignatura. Todos los programas cuentan con **interactividad**, **validación de datos** y **valores por defecto**.
 
-## Estructura de la prueba
+## Estructura del Proyecto
 - **Problema1/**: Expansión polinómica (Triángulo de Pascal) en Python y Java.
-- **Problema2/**: Validador de notación FEN para ajedrez (Python).
-- **Problema3/**: Traductor de palabras reservadas del lenguaje C (C).
+- **Problema2/**: Validador de notación FEN para ajedrez en Python.
+- **Problema3/**: Traductor de palabras reservadas del lenguaje C en C.
 - **Defensa/**: Contiene el material o referencia para la defensa.
 
 ## Enlace a la Defensa
-[Insertar aquí el enlace a tu video de la defensa]
+[Insertar aquí el enlace a tu video de la defensa en YouTube]
 
 ---
 
@@ -22,12 +39,12 @@ Este programa calcula los coeficientes de la expansión polinómica de $(x+1)^n$
   - **Java:** 
     1. Compilar: `javac Problema1/Solucion.java`
     2. Ejecutar: `java -cp Problema1 Solucion`
-- **Resultados:** Los archivos `.txt` se generan automáticamente dentro de la carpeta `Problema1/` con un formato **limpio y profesional** que destaca la configuración y el resultado final.
+- **Resultados:** Los archivos `.txt` se generan automáticamente dentro de la carpeta `Problema1/` con un formato limpio y profesional detallando el tiempo de ejecución.
 
 ## Problema 2: Validación de notación FEN
 Valida si una cadena de texto sigue la notación Forsyth-Edwards de ajedrez mediante un bucle interactivo.
 
-- **Interactividad:** Permite elegir entre importar la cadena FEN desde un archivo de código externo (`datos_fen.py`) o ingresarla manualmente por teclado.
+- **Interactividad:** Permite elegir entre cargar la cadena FEN desde un archivo de código externo o ingresarla manualmente por teclado.
 - **Ejecución:** `python Problema2/fen_validator.py`
 
 ## Problema 3: Traductor de palabras reservadas de C
