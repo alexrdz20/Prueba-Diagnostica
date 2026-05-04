@@ -47,8 +47,32 @@ def calcular_paso_a_paso(x, n, coeficientes):
     return pasos, resultado
 
 def ejecutar_problema1():
-    n = 100
-    x = 2
+    print("--- CONFIGURACIÓN DEL POLINOMIO ---")
+    
+    # Entrada para n
+    while True:
+        entrada_n = input("Ingrese el valor de n (Enter para 100): ").strip()
+        if not entrada_n:
+            n = 100
+            break
+        try:
+            n = int(entrada_n)
+            if n >= 0: break
+            print("Error: n debe ser un número no negativo.")
+        except ValueError:
+            print("Error: Entrada inválida. Ingrese un número entero.")
+
+    # Entrada para x
+    while True:
+        entrada_x = input("Ingrese el valor de x para evaluar f(x) (Enter para 2): ").strip()
+        if not entrada_x:
+            x = 2
+            break
+        try:
+            x = int(entrada_x)
+            break
+        except ValueError:
+            print("Error: Entrada inválida. Ingrese un número entero.")
     
     # Benchmarking
     inicio = time.perf_counter()
@@ -58,7 +82,7 @@ def ejecutar_problema1():
     polinomio_str = formatear_polinomio(coeficientes)
     pasos, resultado = calcular_paso_a_paso(x, n, coeficientes)
     
-    with open("resultados_python.txt", "w") as f:
+    with open("Problema1/resultados_python.txt", "w") as f:
         f.write(f"Resultados para n={n}, x={x}\n")
         f.write(f"Tiempo de ejecucion: {fin - inicio:.6f} segundos\n\n")
         f.write(f"Polinomio: {polinomio_str}\n\n")

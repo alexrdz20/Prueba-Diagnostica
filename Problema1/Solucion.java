@@ -15,8 +15,38 @@ import java.util.*;
 
 public class Solucion {
     public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
         int n = 100;
         int x = 2;
+
+        System.out.println("--- CONFIGURACION DEL POLINOMIO ---");
+        
+        // Entrada para n
+        while (true) {
+            System.out.print("Ingrese el valor de n (Enter para 100): ");
+            String input = sc.nextLine().trim();
+            if (input.isEmpty()) break;
+            try {
+                n = Integer.parseInt(input);
+                if (n >= 0) break;
+                System.out.println("Error: n debe ser un numero no negativo.");
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Entrada invalida. Ingrese un numero entero.");
+            }
+        }
+
+        // Entrada para x
+        while (true) {
+            System.out.print("Ingrese el valor de x para evaluar f(x) (Enter para 2): ");
+            String input = sc.nextLine().trim();
+            if (input.isEmpty()) break;
+            try {
+                x = Integer.parseInt(input);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Entrada invalida. Ingrese un numero entero.");
+            }
+        }
 
         // 1. Generar coeficientes (Fila de Pascal)
         long inicio = System.nanoTime();
@@ -44,7 +74,7 @@ public class Solucion {
         }
 
         // 3. Calcular y guardar resultados
-        try (PrintWriter out = new PrintWriter(new FileWriter("resultados_java.txt"))) {
+        try (PrintWriter out = new PrintWriter(new FileWriter("Problema1/resultados_java.txt"))) {
             out.printf("Resultados para n=%d, x=%d\n", n, x);
             out.printf("Tiempo de ejecucion: %.6f segundos\n\n", tiempo);
             out.println("Polinomio: " + poli.toString() + "\n");

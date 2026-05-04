@@ -1,6 +1,6 @@
 # Proyecto de Redes y Compiladores
 
-Este repositorio contiene la resolución de los problemas planteados para la asignatura.
+Este repositorio contiene la resolución de los problemas planteados para la asignatura. Todos los programas cuentan con **interactividad**, **validación de datos** y **valores por defecto**.
 
 ## Estructura del Proyecto
 - **Problema1/**: Expansión polinómica (Triángulo de Pascal) en Python y Java.
@@ -14,31 +14,34 @@ Este repositorio contiene la resolución de los problemas planteados para la asi
 ---
 
 ## Problema 1: Triángulo de Pascal y Expansión Polinómica
-Este programa calcula los coeficientes de la expansión polinómica de (x+1)^n.
+Este programa calcula los coeficientes de la expansión polinómica de $(x+1)^n$.
 
-- **Instalador:** `Problema1/instalar.bat` (Verifica/Instala Python y Java JDK).
+- **Interactividad:** El programa solicitará los valores de `n` (grado) y `x`. Si presionas **Enter** sin escribir, usará `n=100` y `x=2`.
 - **Ejecución:**
-  - Python: `python Problema1/solucion.py`
-  - Java: `javac Problema1/Solucion.java` y `java Solucion`
+  - **Python:** `python Problema1/solucion.py`
+  - **Java:** 
+    1. Compilar: `javac Problema1/Solucion.java`
+    2. Ejecutar: `java -cp Problema1 Solucion`
+- **Resultados:** Los archivos `.txt` se generan automáticamente dentro de la carpeta `Problema1/`.
 
 ## Problema 2: Validación de notación FEN
-Valida si una cadena de texto sigue la notación Forsyth-Edwards de ajedrez.
+Valida si una cadena de texto sigue la notación Forsyth-Edwards de ajedrez mediante un bucle interactivo.
 
-- **Instalador:** `Problema2/instalar.bat` (Verifica/Instala Python).
+- **Interactividad:** Solicita la cadena FEN. Presionar **Enter** usa la posición inicial por defecto. Escribir `salir` para terminar.
 - **Ejecución:** `python Problema2/fen_validator.py`
 
 ## Problema 3: Traductor de palabras reservadas de C
-Analizador léxico que traduce palabras reservadas de C al español.
+Analizador léxico que traduce palabras reservadas de C al español cargando el archivo dinámicamente en memoria.
 
-- **Instalador:** `Problema3/instalar.bat` (Verifica/Instala GCC).
+- **Interactividad:** Al iniciar, presenta un menú para elegir entre:
+  1. Ingresar nombre de archivo manualmente.
+  2. Usar ejemplo básico.
+  3. Usar ejemplo completo (Predeterminado).
 - **Ejecución:** 
-  1. `gcc Problema3/traductor_palabras.c -o traductor.exe`
-  2. `./traductor.exe ejemplo_completo.c`
+  1. Compilar: `gcc Problema3/traductor_palabras.c -o traductor.exe`
+  2. Ejecutar: `./traductor.exe`
 
 ---
 
-### Nota sobre los scripts de instalación (.bat)
-Cada carpeta incluye un archivo `instalar.bat`. Estos son scripts de automatización que:
-1. Verifican si el lenguaje/compilador necesario está instalado en su sistema.
-2. Si no lo está, intentan instalar automáticamente la dependencia mediante el gestor de paquetes de Windows (`winget`).
-3. Mantienen la ventana abierta al finalizar para que pueda confirmar el éxito del proceso.
+### Notas de Instalación y Dependencias
+Cada carpeta incluye un archivo `instalar.bat` que verifica e instala automáticamente (vía `winget`) los compiladores necesarios (Python, JDK o GCC).

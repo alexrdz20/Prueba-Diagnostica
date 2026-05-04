@@ -74,8 +74,24 @@ def validate_fen(fen):
 
 # Ejemplos de uso:
 if __name__ == "__main__":
-    test_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-    print(f"FEN: {test_fen} -> Válida: {validate_fen(test_fen)}")
+    print("--- VALIDADOR DE NOTACIÓN FEN ---")
+    default_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
     
-    invalid_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR x KQkq - 0 1"
-    print(f"FEN: {invalid_fen} -> Válida: {validate_fen(invalid_fen)}")
+    while True:
+        print("\nIngrese la cadena FEN a validar")
+        print("(Presione Enter para usar la posición inicial por defecto)")
+        print("(Escriba 'salir' para finalizar)")
+        
+        c = input("> ").strip()
+        
+        if c.lower() == 'salir':
+            break
+            
+        if not c:
+            c = default_fen
+            print(f"Usando FEN por defecto: {c}")
+        
+        if validate_fen(c):
+            print(">>> RESULTADO: La cadena FEN es VÁLIDA.")
+        else:
+            print(">>> RESULTADO: La cadena FEN es INVÁLIDA.")

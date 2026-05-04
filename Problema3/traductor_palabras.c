@@ -57,16 +57,40 @@ int main(int argc, char *argv[]) {
     int en_comentario_linea = 0;
     int en_comentario_bloque = 0;
 
+    char nombre_archivo[256];
+    char entrada[256];
+
     if (argc < 2) {
-        printf("Error: Debes proporcionar el nombre del archivo.\n");
-        printf("Uso: %s ejemplo_basico.c\n", argv[0]);
-        return 1;
+        printf("--- TRADUCTOR DE C A ESPA\244OL ---\n");
+        printf("Seleccione una opcion:\n");
+        printf("1. Ingresar nombre de archivo manualmente\n");
+        printf("2. Usar 'ejemplo_basico.c'\n");
+        printf("3. Usar 'ejemplo_completo.c' (Predeterminado)\n");
+        printf("Opcion > ");
+        
+        if (fgets(entrada, sizeof(entrada), stdin)) {
+            entrada[strcspn(entrada, "\n")] = 0;
+            if (strcmp(entrada, "1") == 0) {
+                printf("Ingrese el nombre del archivo: ");
+                if (fgets(entrada, sizeof(entrada), stdin)) {
+                    entrada[strcspn(entrada, "\n")] = 0;
+                    strcpy(nombre_archivo, entrada);
+                }
+            } else if (strcmp(entrada, "2") == 0) {
+                strcpy(nombre_archivo, "Problema3/ejemplo_basico.c");
+            } else {
+                /* Default para opcion 3 o Enter vacio */
+                strcpy(nombre_archivo, "Problema3/ejemplo_completo.c");
+            }
+        }
+    } else {
+        strcpy(nombre_archivo, argv[1]);
     }
 
-    /* Abrir el archivo */
-    archivo = fopen(argv[1], "rb");
+    /* Abrir el archivo y validar existencia */
+    archivo = fopen(nombre_archivo, "rb");
     if (!archivo) {
-        perror("Error al abrir el archivo");
+        printf("Error: No se pudo abrir el archivo '%s'. Verifique que el nombre sea correcto.\n", nombre_archivo);
         return 1;
     }
 
@@ -98,7 +122,7 @@ int main(int argc, char *argv[]) {
     codigo[tamano] = '\0';
     fclose(archivo);
 
-    printf("--- PROCESANDO ARCHIVO: %s ---\n", argv[1]);
+    printf("--- PROCESANDO ARCHIVO: %s ---\n", nombre_archivo);
     printf("--- CODIGO TRADUCIDO AL ESPANOL ---\n\n");
 
     /* Procesar el codigo caracter por caracter */
