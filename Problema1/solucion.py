@@ -21,9 +21,9 @@ def generar_fila_pascal(n):
         fila = nueva_fila
     return fila
 
-def formatear_polinomio(coeficientes):
+def obtener_terminos_polinomio(coeficientes):
     n = len(coeficientes) - 1
-    partes = []
+    terminos = []
     for i, coeff in enumerate(coeficientes):
         potencia = n - i
         termino = ""
@@ -33,8 +33,8 @@ def formatear_polinomio(coeficientes):
             termino += "x"
             if potencia > 1:
                 termino += f"^{potencia}"
-        partes.append(termino)
-    return " + ".join(partes)
+        terminos.append(termino)
+    return terminos
 
 def calcular_paso_a_paso(x, n, coeficientes):
     resultado = 0
@@ -79,17 +79,26 @@ def ejecutar_problema1():
     coeficientes = generar_fila_pascal(n)
     fin = time.perf_counter()
     
-    polinomio_str = formatear_polinomio(coeficientes)
+    terminos = obtener_terminos_polinomio(coeficientes)
     pasos, resultado = calcular_paso_a_paso(x, n, coeficientes)
     
-    with open("Problema1/resultados_python.txt", "w") as f:
-        f.write(f"Resultados para n={n}, x={x}\n")
-        f.write(f"Tiempo de ejecucion: {fin - inicio:.6f} segundos\n\n")
-        f.write(f"Polinomio: {polinomio_str}\n\n")
-        f.write("Calculo paso a paso:\n")
-        for paso in pasos:
-            f.write(paso + "\n")
-        f.write(f"\nResultado final: {resultado}\n")
+    with open("resultados_python.txt", "w") as f:
+        linea80 = "="*80 + "\n"
+        linea_sep = "-"*80 + "\n"
+        
+        f.write(linea80)
+        f.write("           RESULTADOS DEL CALCULO POLINOMIAL (Problema 1)\n")
+        f.write(linea80)
+        f.write(f"CONFIGURACION:\n")
+        f.write(f"  Grado (n) : {n}\n")
+        f.write(f"  Valor (x) : {x}\n")
+        f.write(linea_sep)
+        f.write(f"TIEMPO DE EJECUCION: {fin - inicio:.6f} segundos\n")
+        f.write(linea_sep + "\n")
+        
+        f.write(f"RESULTADO FINAL:\n")
+        f.write(f"{resultado}\n\n")
+        f.write(linea80)
 
 if __name__ == "__main__":
     ejecutar_problema1()

@@ -22,7 +22,7 @@ Este programa calcula los coeficientes de la expansión polinómica de $(x+1)^n$
   - **Java:** 
     1. Compilar: `javac Problema1/Solucion.java`
     2. Ejecutar: `java -cp Problema1 Solucion`
-- **Resultados:** Los archivos `.txt` se generan automáticamente dentro de la carpeta `Problema1/`.
+- **Resultados:** Los archivos `.txt` se generan automáticamente dentro de la carpeta `Problema1/` con un formato **limpio y profesional** que destaca la configuración y el resultado final.
 
 ## Problema 2: Validación de notación FEN
 Valida si una cadena de texto sigue la notación Forsyth-Edwards de ajedrez mediante un bucle interactivo.

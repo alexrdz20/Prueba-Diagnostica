@@ -74,11 +74,19 @@ public class Solucion {
         }
 
         // 3. Calcular y guardar resultados
-        try (PrintWriter out = new PrintWriter(new FileWriter("Problema1/resultados_java.txt"))) {
-            out.printf("Resultados para n=%d, x=%d\n", n, x);
-            out.printf("Tiempo de ejecucion: %.6f segundos\n\n", tiempo);
-            out.println("Polinomio: " + poli.toString() + "\n");
-            out.println("Calculo paso a paso:");
+        try (PrintWriter out = new PrintWriter(new FileWriter("resultados_java.txt"))) {
+            String line80 = "================================================================================";
+            String lineSep = "--------------------------------------------------------------------------------";
+            
+            out.println(line80);
+            out.println("           RESULTADOS DEL CALCULO POLINOMIAL (Problema 1)");
+            out.println(line80);
+            out.println("CONFIGURACION:");
+            out.printf("  Grado (n) : %d\n", n);
+            out.printf("  Valor (x) : %d\n", x);
+            out.println(lineSep);
+            out.printf("TIEMPO DE EJECUCION: %.6f segundos\n", tiempo);
+            out.println(lineSep + "\n");
 
             BigInteger total = BigInteger.ZERO;
             BigInteger valX = BigInteger.valueOf(x);
@@ -87,9 +95,11 @@ public class Solucion {
                 BigInteger c = fila.get(i);
                 BigInteger termino = c.multiply(valX.pow(pot));
                 total = total.add(termino);
-                out.printf("%s*(%d^%d) = %s\n", c, x, pot, termino);
             }
-            out.println("\nResultado final: " + total);
+
+            out.println("RESULTADO FINAL:");
+            out.println(total + "\n");
+            out.println(line80);
         }
         System.out.println("Hecho. Revisa resultados_java.txt");
     }
