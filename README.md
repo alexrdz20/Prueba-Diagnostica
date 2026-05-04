@@ -27,7 +27,7 @@ Este programa calcula los coeficientes de la expansión polinómica de $(x+1)^n$
 ## Problema 2: Validación de notación FEN
 Valida si una cadena de texto sigue la notación Forsyth-Edwards de ajedrez mediante un bucle interactivo.
 
-- **Interactividad:** Solicita la cadena FEN. Presionar **Enter** usa la posición inicial por defecto. Escribir `salir` para terminar.
+- **Interactividad:** Permite elegir entre importar la cadena FEN desde un archivo de código externo (`datos_fen.py`) o ingresarla manualmente por teclado.
 - **Ejecución:** `python Problema2/fen_validator.py`
 
 ## Problema 3: Traductor de palabras reservadas de C

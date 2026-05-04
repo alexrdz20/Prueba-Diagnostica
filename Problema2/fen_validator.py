@@ -75,22 +75,42 @@ def validate_fen(fen):
 # Ejemplos de uso:
 if __name__ == "__main__":
     print("--- VALIDADOR DE NOTACIÓN FEN ---")
-    default_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
     
     while True:
-        print("\nIngrese la cadena FEN a validar")
-        print("(Presione Enter para usar la posición inicial por defecto)")
-        print("(Escriba 'salir' para finalizar)")
+        print("\nSeleccione cómo ingresar la cadena FEN:")
+        print("1. Importar desde archivo de código (datos_fen.py)")
+        print("2. Ingresar manualmente por teclado")
+        print("0. Salir")
         
-        c = input("> ").strip()
+        opcion = input("> ").strip()
         
-        if c.lower() == 'salir':
+        if opcion == "0" or opcion.lower() == "salir":
             break
             
-        if not c:
-            c = default_fen
-            print(f"Usando FEN por defecto: {c}")
+        c = ""
+        if opcion == "1":
+            try:
+                # Importar dinámicamente el archivo de datos
+                from datos_fen import FEN_EJEMPLO
+                c = FEN_EJEMPLO
+                print(f"Cadena importada correctamente: {c}")
+            except ImportError:
+                print("Error: No se encontró el archivo 'datos_fen.py'.")
+                continue
+            except Exception as e:
+                print(f"Error al importar los datos: {e}")
+                continue
+                
+        elif opcion == "2":
+            c = input("Ingrese la cadena FEN: ").strip()
+        else:
+            print("Opción no válida.")
+            continue
         
+        if not c:
+            print("Error: No se proporcionó ninguna cadena FEN.")
+            continue
+
         if validate_fen(c):
             print(">>> RESULTADO: La cadena FEN es VÁLIDA.")
         else:
