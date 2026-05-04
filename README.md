@@ -31,12 +31,12 @@ Valida si una cadena de texto sigue la notación Forsyth-Edwards de ajedrez medi
 - **Ejecución:** `python Problema2/fen_validator.py`
 
 ## Problema 3: Traductor de palabras reservadas de C
-Analizador léxico que traduce palabras reservadas de C al español cargando el archivo dinámicamente en memoria.
+Analizador léxico optimizado que traduce palabras reservadas de C al español leyendo el código directamente en flujo continuo (`fgetc`), sin saturar la memoria y manteniendo un diseño de código altamente limpio y compacto.
 
-- **Interactividad:** Al iniciar, presenta un menú para elegir entre:
+- **Interactividad:** Cuenta con un menú interactivo con limpieza de pantalla (`cls`) para elegir entre:
   1. Ingresar nombre de archivo manualmente.
   2. Usar ejemplo básico.
-  3. Usar ejemplo completo (Predeterminado).
+  3. Usar ejemplo completo.
 - **Ejecución:** 
   1. Compilar: `gcc Problema3/traductor_palabras.c -o traductor.exe`
   2. Ejecutar: `./traductor.exe`
