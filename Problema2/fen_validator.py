@@ -1,117 +1,85 @@
 """
-UNIVERSIDAD NACIONAL EXPERIMENTAL DE GUAYANA
-Asignatura: Lenguajes y Compiladores
-Problema 2: Validador de Notación FEN (Forsyth-Edwards Notation)
-
-Explicación:
-Valida si una cadena cumple con el estándar FEN, verificando:
-1. Las 8 filas del tablero.
-2. El turno (w/b).
-3. Disponibilidad de enroque.
-4. Peón al paso.
-5. Regla de los 50 movimientos.
-6. Número de jugada completa.
+UNIVERSIDAD NACIONAL EXPERIMENTAL DE GUAYANA - Lenguajes y Compiladores
+Problema 2: Validador y Analizador FEN (Versión Final Robusta)
 """
 import re
+import os
 
-def validate_fen(fen):
-    """
-    Valida si una cadena C se encuentra en notación FEN (Forsyth-Edwards Notation).
-    Retorna True si es válida, False en caso contrario.
-    """
-    # 1. Verificar que tenga 6 campos separados por espacios
-    fields = fen.strip().split(' ')
-    if len(fields) != 6:
-        return False
+def analizar_fen(fen):
+    partes = fen.strip().split()
+    if len(partes) != 6:
+        return False, "Error: La cadena debe tener exactamente 6 campos."
 
-    placement, color, castling, en_passant, halfmove, fullmove = fields
+    tablero, turno, enroque, paso, medio, total = partes
 
-    # 2. Validar Piece Placement (Campo 1)
-    ranks = placement.split('/')
-    if len(ranks) != 8:
-        return False
+    # 1. Validar Filas y Piezas (Strict)
+    filas = tablero.split('/')
+    if len(filas) != 8:
+        return False, "Error: El tablero debe tener 8 filas."
     
-    for rank in ranks:
-        squares = 0
-        for char in rank:
-            if char.isdigit():
-                # Si es dígito, debe ser entre 1 y 8
-                if char == '0': return False
-                squares += int(char)
-            elif char.lower() in 'pnbrqk':
-                # Si es pieza, suma 1 cuadrado
-                squares += 1
+    for fila in filas:
+        n = 0
+        for c in fila:
+            if c.isdigit():
+                if c == '0': return False, "Error: El dígito '0' no es válido."
+                n += int(c)
+            elif c.lower() in 'pnbrqk':
+                n += 1
             else:
-                # Carácter no permitido
-                return False
-        if squares != 8:
-            return False
+                return False, f"Error: Carácter inválido '{c}' en el tablero."
+        if n != 8:
+            return False, f"Error: Fila con longitud inválida ({n} en lugar de 8)."
 
-    # 3. Validar Active Color (Campo 2)
-    if color not in ['w', 'b']:
-        return False
-
-    # 4. Validar Castling Availability (Campo 3)
-    if castling != '-':
-        if not re.fullmatch(r'[KQkq]+', castling) or len(set(castling)) != len(castling):
-            return False
-
-    # 5. Validar En Passant Target Square (Campo 4)
-    if en_passant != '-':
-        # Debe ser una coordenada válida (ej. e3, a6)
-        if not re.fullmatch(r'[a-h][36]', en_passant):
-            return False
-
-    # 6. Validar Halfmove Clock (Campo 5)
-    if not halfmove.isdigit():
-        return False
-
-    # 7. Validar Fullmove Number (Campo 6)
-    if not fullmove.isdigit() or int(fullmove) <= 0:
-        return False
-
-    return True
-
-# Ejemplos de uso:
-if __name__ == "__main__":
-    print("--- VALIDADOR DE NOTACIÓN FEN ---")
+    # 2. Validar Turno y Enroque
+    if turno not in ['w', 'b']:
+        return False, "Error: Turno inválido (debe ser 'w' o 'b')."
     
-    while True:
-        print("\nSeleccione cómo ingresar la cadena FEN:")
-        print("1. Importar desde archivo de código (datos_fen.py)")
-        print("2. Ingresar manualmente por teclado")
-        print("0. Salir")
-        
-        opcion = input("> ").strip()
-        
-        if opcion == "0" or opcion.lower() == "salir":
-            break
-            
-        c = ""
-        if opcion == "1":
-            try:
-                # Importar dinámicamente el archivo de datos
-                from datos_fen import FEN_EJEMPLO
-                c = FEN_EJEMPLO
-                print(f"Cadena importada correctamente: {c}")
-            except ImportError:
-                print("Error: No se encontró el archivo 'datos_fen.py'.")
-                continue
-            except Exception as e:
-                print(f"Error al importar los datos: {e}")
-                continue
-                
-        elif opcion == "2":
-            c = input("Ingrese la cadena FEN: ").strip()
-        else:
-            print("Opción no válida.")
-            continue
-        
-        if not c:
-            print("Error: No se proporcionó ninguna cadena FEN.")
-            continue
+    if enroque != '-' and not re.fullmatch(r'[KQkq]+', enroque):
+        return False, "Error: Formato de enroque inválido."
 
-        if validate_fen(c):
-            print(">>> RESULTADO: La cadena FEN es VÁLIDA.")
-        else:
-            print(">>> RESULTADO: La cadena FEN es INVÁLIDA.")
+    # 3. Validar Peón al paso y Contadores
+    if (paso != '-' and not re.fullmatch(r'[a-h][36]', paso)):
+        return False, "Error: Coordenada de peón al paso inválida."
+    
+    if not medio.isdigit() or not total.isdigit():
+        return False, "Error: Los contadores de jugadas deben ser números."
+
+    # 4. Construcción de la descripción (Si es válida)
+    m = {'K':'Blanco(R)', 'Q':'Blanco(D)', 'k':'Negro(R)', 'q':'Negro(D)'}
+    enroques = [m[c] for c in enroque if c in m]
+    
+    analisis = [
+        f"Turno        : {'Blancas' if turno == 'w' else 'Negras'}",
+        f"Enroques     : {', '.join(enroques) if enroques else 'Ninguno'}",
+        f"Peón al paso : {paso if paso != '-' else 'No hay'}",
+        f"Jugada nro   : {total} (Reloj 50 mov: {medio})"
+    ]
+    return True, "\n".join(analisis)
+
+if __name__ == "__main__":
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("="*45)
+        print("   ANALIZADOR FEN (AJEDREZ)")
+        print("="*45)
+        print("\n1. Cargar ejemplo | 2. Entrada manual | 0. Salir")
+        op = input("> ").strip()
+        if op == "0": break
+        
+        cadena = ""
+        if op == "1":
+            try:
+                from datos_fen import FEN_EJEMPLO
+                cadena = FEN_EJEMPLO
+                print(f"\n[INFO] Procesando: {cadena}")
+            except:
+                print("\n[!] Error: No se encontró datos_fen.py")
+        elif op == "2":
+            cadena = input("\nIngrese FEN: ").strip()
+        
+        if cadena:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            valido, resultado = analizar_fen(cadena)
+            print(f"\n[{'V' if valido else 'X'}] {'CADENA VÁLIDA' if valido else 'CADENA INVÁLIDA'}")
+            print(f"{'-' * 45}\n{resultado}\n{'-' * 45}")
+            input("\nPresione Enter para continuar...")

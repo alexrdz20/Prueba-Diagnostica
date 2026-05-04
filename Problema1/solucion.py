@@ -9,6 +9,7 @@ el Triángulo de Pascal. Utiliza memoria dinámica (listas de Python) y
 precisión arbitraria para manejar n=100.
 """
 import time
+import os
 
 def generar_fila_pascal(n):
     # Genera la fila n del Triángulo de Pascal
@@ -47,58 +48,70 @@ def calcular_paso_a_paso(x, n, coeficientes):
     return pasos, resultado
 
 def ejecutar_problema1():
-    print("--- CONFIGURACIÓN DEL POLINOMIO ---")
-    
-    # Entrada para n
     while True:
-        entrada_n = input("Ingrese el valor de n (Enter para 100): ").strip()
-        if not entrada_n:
-            n = 100
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("\n==================================================")
+        print(" EXPANSION POLINOMIAL (TRIANGULO DE PASCAL) - PYTHON")
+        print("==================================================")
+        print("  [1] Usar valores por defecto (n=100, x=2)")
+        print("  [2] Ingresar valores manualmente")
+        print("  [0] Salir")
+        print("--------------------------------------------------")
+        
+        opcion = input("Seleccione una opcion > ").strip()
+        
+        if opcion == "0":
+            print("Saliendo...")
             break
-        try:
-            n = int(entrada_n)
-            if n >= 0: break
-            print("Error: n debe ser un número no negativo.")
-        except ValueError:
-            print("Error: Entrada inválida. Ingrese un número entero.")
+        
+        n, x = 100, 2 # Valores base
 
-    # Entrada para x
-    while True:
-        entrada_x = input("Ingrese el valor de x para evaluar f(x) (Enter para 2): ").strip()
-        if not entrada_x:
-            x = 2
-            break
-        try:
-            x = int(entrada_x)
-            break
-        except ValueError:
-            print("Error: Entrada inválida. Ingrese un número entero.")
-    
-    # Benchmarking
-    inicio = time.perf_counter()
-    coeficientes = generar_fila_pascal(n)
-    fin = time.perf_counter()
-    
-    terminos = obtener_terminos_polinomio(coeficientes)
-    pasos, resultado = calcular_paso_a_paso(x, n, coeficientes)
-    
-    with open("resultados_python.txt", "w") as f:
-        linea80 = "="*80 + "\n"
-        linea_sep = "-"*80 + "\n"
+        if opcion == "2":
+            print("\n--- CONFIGURACION MANUAL ---")
+            while True:
+                entrada_n = input("Ingrese el valor de n: ").strip()
+                try:
+                    n = int(entrada_n)
+                    if n >= 0: break
+                    print("Error: n debe ser >= 0.")
+                except ValueError:
+                    print("Error: Ingrese un numero entero.")
+
+            while True:
+                entrada_x = input("Ingrese el valor de x: ").strip()
+                try:
+                    x = int(entrada_x)
+                    break
+                except ValueError:
+                    print("Error: Ingrese un numero entero.")
+        elif opcion != "1":
+            print("[!] Opcion no valida.")
+            continue
+
+        # Proceso de calculo
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(f"\n[INFO] Calculando para n={n}, x={x}...")
+        inicio = time.perf_counter()
+        coeficientes = generar_fila_pascal(n)
+        fin = time.perf_counter()
         
-        f.write(linea80)
-        f.write("           RESULTADOS DEL CALCULO POLINOMIAL (Problema 1)\n")
-        f.write(linea80)
-        f.write(f"CONFIGURACION:\n")
-        f.write(f"  Grado (n) : {n}\n")
-        f.write(f"  Valor (x) : {x}\n")
-        f.write(linea_sep)
-        f.write(f"TIEMPO DE EJECUCION: {fin - inicio:.6f} segundos\n")
-        f.write(linea_sep + "\n")
+        pasos, resultado = calcular_paso_a_paso(x, n, coeficientes)
         
-        f.write(f"RESULTADO FINAL:\n")
-        f.write(f"{resultado}\n\n")
-        f.write(linea80)
+        with open("resultados_python.txt", "w") as f:
+            linea80 = "="*80 + "\n"
+            linea_sep = "-"*80 + "\n"
+            f.write(linea80)
+            f.write("           RESULTADOS DEL CALCULO POLINOMIAL (Problema 1)\n")
+            f.write(linea80)
+            f.write(f"CONFIGURACION:\n  Grado (n) : {n}\n  Valor (x) : {x}\n")
+            f.write(linea_sep)
+            f.write(f"TIEMPO DE EJECUCION: {fin - inicio:.6f} segundos\n")
+            f.write(linea_sep + "\n")
+            f.write(f"RESULTADO FINAL:\n{resultado}\n\n")
+            f.write(linea80)
+        
+        print(f"[OK] Completado en {fin - inicio:.6f} s. Revisa 'resultados_python.txt'")
+        input("\nPresione Enter para continuar...")
 
 if __name__ == "__main__":
     ejecutar_problema1()

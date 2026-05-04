@@ -5,7 +5,7 @@ CONFIGURACION:
   Grado (n) : 100
   Valor (x) : 2
 --------------------------------------------------------------------------------
-TIEMPO DE EJECUCION: 0,002963 segundos
+TIEMPO DE EJECUCION: 0,004651 segundos
 --------------------------------------------------------------------------------
 
 RESULTADO FINAL:
