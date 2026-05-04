@@ -34,18 +34,22 @@ Este repositorio contiene la resolución de los problemas planteados para la asi
 Este programa calcula los coeficientes de la expansión polinómica de $(x+1)^n$.
 
 - **Interactividad:** El programa solicitará los valores de `n` (grado) y `x`. Si presionas **Enter** sin escribir, usará `n=100` y `x=2`.
-- **Ejecución:**
-  - **Python:** `python Problema1/solucion.py`
-  - **Java:** 
-    1. Compilar: `javac Problema1/Solucion.java`
-    2. Ejecutar: `java -cp Problema1 Solucion`
-- **Resultados:** Los archivos `.txt` se generan automáticamente dentro de la carpeta `Problema1/` con un formato limpio y profesional detallando el tiempo de ejecución.
+- **Ruta y Ejecución (Python):**
+  1. Abrir terminal e ingresar a la carpeta: `cd Problema1`
+  2. Ejecutar: `python solucion.py`
+- **Ruta y Ejecución (Java):** 
+  1. Abrir terminal e ingresar a la carpeta: `cd Problema1`
+  2. Compilar: `javac Solucion.java`
+  3. Ejecutar: `java Solucion`
+- **Resultados:** Los archivos `.txt` se generan automáticamente dentro de la misma carpeta con un formato limpio y profesional detallando el tiempo de ejecución.
 
 ## Problema 2: Validación de notación FEN
 Valida si una cadena de texto sigue la notación Forsyth-Edwards de ajedrez mediante un bucle interactivo.
 
 - **Interactividad:** Permite elegir entre cargar la cadena FEN desde un archivo de código externo o ingresarla manualmente por teclado.
-- **Ejecución:** `python Problema2/fen_validator.py`
+- **Ruta y Ejecución:** 
+  1. Abrir terminal e ingresar a la carpeta: `cd Problema2`
+  2. Ejecutar: `python fen_validator.py`
 
 ## Problema 3: Traductor de palabras reservadas de C
 Analizador léxico optimizado que traduce palabras reservadas de C al español leyendo el código directamente en flujo continuo (`fgetc`), sin saturar la memoria y manteniendo un diseño de código altamente limpio y compacto.
@@ -54,9 +58,10 @@ Analizador léxico optimizado que traduce palabras reservadas de C al español l
   1. Ingresar nombre de archivo manualmente.
   2. Usar ejemplo básico.
   3. Usar ejemplo completo.
-- **Ejecución:** 
-  1. Compilar: `gcc Problema3/traductor_palabras.c -o traductor.exe`
-  2. Ejecutar: `./traductor.exe`
+- **Ruta y Ejecución:** 
+  1. Abrir terminal e ingresar a la carpeta: `cd Problema3`
+  2. Compilar: `gcc traductor_palabras.c -o traductor.exe`
+  3. Ejecutar: `./traductor.exe` (en Windows) o `.\traductor.exe`
 
 ---
 
