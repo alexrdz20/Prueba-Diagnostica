@@ -19,7 +19,7 @@ Periodo lectivo: 2025-II
 
 Este repositorio contiene la resolución de los problemas planteados para la asignatura. Todos los programas cuentan con **interactividad**, **validación de datos** y **valores por defecto**.
 
-## Estructura del Proyecto
+## Estructura de la Prueba
 - **Problema1/**: Expansión polinómica (Triángulo de Pascal) en Python y Java.
 - **Problema2/**: Validador de notación FEN para ajedrez en Python.
 - **Problema3/**: Traductor de palabras reservadas del lenguaje C en C.
