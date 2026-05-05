@@ -26,7 +26,7 @@ Este repositorio contiene la resolución de los problemas planteados para la asi
 - **Instaladores/**: Scripts de automatización para la instalación de dependencias.
 
 ## Enlace a la Defensa
-[Insertar aquí el enlace a tu video de la defensa en YouTube]
+[https://youtu.be/EASUDdoy7PQ](https://youtu.be/EASUDdoy7PQ)
 
 ---
 
