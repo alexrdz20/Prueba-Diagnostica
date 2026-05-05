@@ -1,7 +1,4 @@
-"""
-UNIVERSIDAD NACIONAL EXPERIMENTAL DE GUAYANA - Lenguajes y Compiladores
-Problema 2: Validador y Analizador FEN (Versión Final Robusta)
-"""
+
 import re
 import os
 

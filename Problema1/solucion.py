@@ -1,13 +1,4 @@
-"""
-UNIVERSIDAD NACIONAL EXPERIMENTAL DE GUAYANA
-Asignatura: Lenguajes y Compiladores
-Problema 1: Polinomio (x+1)^n usando Triángulo de Pascal
 
-Explicación:
-Este código implementa la generación de coeficientes binomiales mediante
-el Triángulo de Pascal. Utiliza memoria dinámica (listas de Python) y
-precisión arbitraria para manejar n=100.
-"""
 import time
 import os
 

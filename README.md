@@ -15,7 +15,7 @@ Periodo lectivo: 2025-II
 
 ---
 
-# Resolución de los Problemas (Lo que hice)
+# Resolución de los Problemas
 
 Este repositorio contiene la resolución de los problemas planteados para la asignatura. Todos los programas cuentan con **interactividad**, **validación de datos** y **valores por defecto**.
 
@@ -23,7 +23,7 @@ Este repositorio contiene la resolución de los problemas planteados para la asi
 - **Problema1/**: Expansión polinómica (Triángulo de Pascal) en Python y Java.
 - **Problema2/**: Validador de notación FEN para ajedrez en Python.
 - **Problema3/**: Traductor de palabras reservadas del lenguaje C en C.
-- **Defensa/**: Contiene el material o referencia para la defensa.
+- **Instaladores/**: Scripts de automatización para la instalación de dependencias.
 
 ## Enlace a la Defensa
 [Insertar aquí el enlace a tu video de la defensa en YouTube]
@@ -66,4 +66,6 @@ Analizador léxico optimizado que traduce palabras reservadas de C al español l
 ---
 
 ### Notas de Instalación y Dependencias
-Cada carpeta incluye un archivo `instalar.bat` que verifica e instala automáticamente (vía `winget`) los compiladores necesarios (Python, JDK o GCC).
+Los scripts de instalación se encuentran en la carpeta **Instaladores/**. Estos archivos verifican e instalan automáticamente (vía `winget`) los compiladores necesarios (Python, JDK o GCC) para cada problema.
+- Para usarlos, simplemente ejecuta el archivo `.bat` correspondiente desde la terminal o haciendo doble clic.
+
